@@ -1,0 +1,62 @@
+/**app.wxss**/
+page {
+  /* background-color: rgb(241,239,242); */
+  background: linear-gradient(to right, #4A8DC8 , #8C9AFB);
+}
+.paddingSide {
+  padding: 0 24rpx;
+}
+input, textarea  {
+  color: #555;
+  background-color: #fff;
+  border: 2rpx solid #ccc;
+  border-radius: 8rpx;
+  padding: 6rpx 12rpx;
+  box-sizing: padding;
+}
+
+label {
+  font-size: 28rpx;
+}
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.mask {
+  position: fixed;
+  width: 100%;
+  height:100%;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  background-color: rgba(0,0,0, 0.3);
+}
+
+.mask form {
+  width: 70%;
+  padding: 16rpx 32rpx;
+  border-radius: 10rpx;
+  background: #fff
+}
+.mask input {
+  margin-top: 10rpx;
+}
+.mask textarea {
+  height: 150rpx;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 10rpx;
+}
+.mask .tips {
+  font-size: 24rpx;
+  color: red;
+}
+.btn-view {
+  margin: 30rpx 0 10rpx;
+  text-align: center;
+}
+.btn-view button:first-child {
+  margin-right: 150rpx;
+}

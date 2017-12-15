@@ -1,0 +1,45 @@
+<view>
+  <!-- 顶部搜索、添加 -->
+  <view class='header paddingSide'>
+    <button size="mini" type="primary">结算</button>
+    <text>¥</text>{{total}}
+    <view class='more'>更多 »</view>
+  </view>
+  <!--未结算账单列表  -->
+  <view class='body paddingSide'>
+    <view class='list'>
+      <image class="userAvatar left" src="../image/1.jpg"></image>
+      <view class='middle'>
+        <view class='name'>小包总:</view>
+        <view class='details'>物管费</view>
+        <view class='createTime'>12月15日 11:07</view>  
+      </view>
+      <view class='right'>
+        <view class='money'>
+          <text>¥</text>500
+        </view>
+      </view>
+    </view>
+  </view>
+  <!--添加按钮  -->
+  <text class='add' catchtap="billMask" >记</text>
+  <!--添加账单表单 -->
+  <view class='mask' hidden="{{createBill ? false: true}}" catchtap="closeMask" id="addBillMask">
+    <form bindsubmit="addSubmit" class='center'>
+      <label>
+        金额 <input placeholder="请输入金额" maxlength="10" name="money" confirm-type="next" type='digit' value='{{money}}' />
+      </label>
+      <label>
+        类型 <input placeholder="请选择类型" name="type" catchtap="showBillType" value='{{typeValue}}' disabled='true'/>
+      </label>
+      <label>
+        详情 <textarea placeholder="请输入详情" maxlength="200" name="detail" confirm-type="done" value='{{detail}}' />
+      </label>
+      <text class="tips">{{tips}}</text>
+      <view class='btn-view'>
+        <button formType="submit" type="primary" size="mini">添加</button>
+        <button size="mini" catchtap="billMask">取消</button>
+      </view>
+    </form> 
+  </view>
+</view>

@@ -1,0 +1,53 @@
+/**index.wxss**/
+.header {
+  background-color: #fff;
+  font-size: 14px;
+  overflow: hidden;
+  padding-top:10rpx;
+  padding-bottom: 10rpx;
+  border-bottom: 2rpx solid #eee;
+}
+.header input {
+  background-color: rgb(241,239,242);
+  border-radius: 10rpx;
+  padding: 0;
+  padding-left: 20rpx;
+  width: 88%;
+  display: inline-block;
+}
+.icon-add {
+  transform: rotate(45deg);
+  float: right;
+}
+.icon-next {
+  width: 30rpx;
+  height: 30rpx;
+  border-color: rgb(173,171,174);
+  border-width: 4rpx;
+  border-bottom-style: solid;
+  border-right-style: solid;
+  display: inline-block;
+  transform: rotate(-45deg) translateX(-12rpx);
+}
+
+.item-list {
+  height: 80rpx;
+  margin: 24rpx 0;
+  line-height: 80rpx;
+  background-color: #fff;
+  text-align: right;
+}
+.item-list:first-child{
+  margin-top: 0;
+}
+.item-list text {
+  float: left;
+}
+
+#addMask input {
+  font-size: 24rpx;
+}
+#addMask button {
+  width: 100%;
+  margin-top: 20rpx;
+}

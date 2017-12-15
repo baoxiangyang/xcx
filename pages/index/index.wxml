@@ -1,0 +1,40 @@
+<!--index.wxml-->
+<view>
+  <!-- 顶部搜索、添加 -->
+  <view class='header paddingSide'>
+    <input confirm-type="search" type="text" maxlength="10" placeholder="请输入需要查询的名称" />
+    <icon type="cancel" class='icon-add' size="25" catchtap="createRoom"/>
+  </view>
+  <!-- 房间列表 -->
+  <view class='item-Box'>
+    <view class='item-list paddingSide' wx:for="{{roomList}}" wx:key="index" catchtap="addRoom">
+      <text>{{item.name}}</text>
+      <i class='icon-next'> </i>
+    </view>
+  </view>
+  <view class='mask' hidden="{{createShow ? false: true}}" catchtap="closeMask" id="roomMask">
+    <form bindsubmit="createSubmit" class='center'>
+      <label>
+        名称 <input placeholder="请输入名称" maxlength="10" name="name" confirm-type="next" value='{{initValue}}'/>
+      </label>
+      <label>
+        口令 <input placeholder="请输入口令" maxlength="10" name="password" confirm-type="next" type="number" value='{{initValue}}'/>
+      </label>
+      <label>
+        描述 <textarea placeholder="请输入描述" maxlength="200" name="describe" confirm-type="done" value='{{initValue}}'/>
+      </label>
+      <text class="tips">{{tips}}</text>
+      <view class='btn-view'>
+        <button formType="submit" type="primary" size="mini">创建</button>
+        <button size="mini" catchtap="createRoom">取消</button>
+      </view>
+    </form> 
+  </view>
+  <view class='mask' hidden="{{addShow ? false: true}}" catchtap="closeMask" id="addMask">
+    <form bindsubmit="addSubmit" class='center'>
+      <input placeholder="请输入口令" maxlength="10" name="password" confirm-type="next" type="number" value='{{initValue}}'/>
+      <text class="tips">{{addTips}}</text>
+      <button formType="submit" type="primary" size="mini">确定</button>
+    </form> 
+  </view>
+</view>

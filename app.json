@@ -1,0 +1,13 @@
+{
+  "pages":[
+    "pages/bills/bills",
+    "pages/index/index",
+    "pages/logs/logs"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "合租记账",
+    "navigationBarTextStyle":"black"
+  }
+}
