@@ -1,7 +1,8 @@
 //index.js
 //获取应用实例
-const app = getApp()
-
+const app = getApp(),
+  userInfo = app.globalData.userInfo,
+  postRequest = require('../../utils/util.js').postRequest;
 Page({
   data: {
     createShow: false,
@@ -9,7 +10,7 @@ Page({
     tips: '',
     addTips: '',
     initValue: '',
-    roomList: [{name:'5016'}],
+    roomList: [],
   },
   //显示隐藏 创建房间
   createRoom: function() {
@@ -44,24 +45,27 @@ Page({
       });
       return;
     }
-    if(data.length > 10){
+    if(data.name.length > 10){
       this.setData({
         tips: '名称不能超过10个字符'
       });
       return;
     }
-    if (data.length > 10) {
+    if (data.password.length > 10) {
       this.setData({
         tips: '口令不能超过10个字符'
       });
       return;
     }
-    if (data.length > 10) {
+    if (data.describe.length > 200) {
       this.setData({
         tips: '描述不能超过200个字符'
       });
       return;
     }
+    postRequest('/room/createRoom', data).then(body => {
+      console.log(body)
+    })
     this.setData({
       tips: '',
       createShow: false,

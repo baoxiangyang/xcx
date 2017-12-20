@@ -13,7 +13,31 @@ const formatNumber = n => {
   n = n.toString()
   return n[1] ? n : '0' + n
 }
-
+let oldCookies = wx.getStorageSync('cookies') || '';
+function postRequest(url, data){
+  return new Promise((resolve, reject) => {
+    wx.request({
+      url: `http://127.0.0.1${url}`,
+      method: 'POST',
+      data,
+      header: {
+        Cookie: oldCookies
+      },
+      success: res => {
+        let cookies = res.header['Set-Cookie'] || res.header.Cookie;
+        if(cookies) {
+          oldCookies = cookies;
+          wx.setStorage({ key: 'cookies', data: cookies });
+        }
+        resolve(res.data);
+      },
+      fail: err => {
+        reject(err);
+      }
+    });
+  });
+}
 module.exports = {
-  formatTime: formatTime
+  formatTime,
+  postRequest
 }
