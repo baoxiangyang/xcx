@@ -1,7 +1,6 @@
 //index.js
 //获取应用实例
 const app = getApp(),
-  userInfo = app.globalData.userInfo,
   postRequest = require('../../utils/util.js').postRequest;
 Page({
   data: {
@@ -11,6 +10,8 @@ Page({
     addTips: '',
     initValue: '',
     roomList: [],
+    pageNo: 1,
+    findName: ''
   },
   //显示隐藏 创建房间
   createRoom: function() {
@@ -63,50 +64,58 @@ Page({
       });
       return;
     }
-    postRequest('/room/createRoom', data).then(body => {
-      console.log(body)
-    })
-    this.setData({
-      tips: '',
-      createShow: false,
-      roomList: this.data.roomList.concat([data]),
-      initValue: ''
+    let userInfo = app.globalData.userInfo;
+    postRequest('/room/createRoom', data, true).then(body => {
+      if (body.code === 0){
+        userInfo.roomList.push(body._id);
+        data._id = body._id;
+        this.data.roomList.unshift(data);
+        this.setData({
+          tips: '',
+          createShow: false,
+          roomList: this.data.roomList,
+          initValue: ''
+        });
+      }else{
+        this.setData({
+          tips: body.msg
+        });
+      }
+    });
+  },
+  getList: function(nextPage){
+    let { pageNo, findName, roomList} = this.data;
+    if (nextPage){
+      pageNo += 1;
+    }else{
+      pageNo = 1;
+    }
+    return postRequest('/room/getRoomList', {name: findName, pageNo: pageNo}, true).then(data => {
+      if (data.code === 0) {
+        this.setData({
+          roomList: nextPage ? roomList.concat(data.roomList) : data.roomList,
+          pageNo
+        });
+      }else{
+        return Promise.reject(data);
+      }
+    }).catch(e => {
+      wx.showModal({
+        title: '失败',
+        content: nextPage ? '获取房间失败，请重试' : '获取房间失败，请下拉刷新',
+        showCancel: false,
+        confirmColor: '#ff0000'
+      });
     });
   },
   onLoad: function () {
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
-    } else if (this.data.canIUse){
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-      }
-    } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
-        }
-      })
-    }
+    this.getList();
   },
-  getUserInfo: function(e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
-    })
+  onPullDownRefresh: function(){
+    this.getList().then(() => {
+      wx.stopPullDownRefresh();
+    },() => {
+      wx.stopPullDownRefresh();
+    });
   }
 })

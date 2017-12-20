@@ -14,7 +14,11 @@ const formatNumber = n => {
   return n[1] ? n : '0' + n
 }
 let oldCookies = wx.getStorageSync('cookies') || '';
-function postRequest(url, data){
+function postRequest(url, data, loding){
+    loding && wx.showLoading({
+      title: '加载中',
+      mask: true
+    });
   return new Promise((resolve, reject) => {
     wx.request({
       url: `http://127.0.0.1${url}`,
@@ -33,6 +37,9 @@ function postRequest(url, data){
       },
       fail: err => {
         reject(err);
+      },
+      complete: () =>{
+        loding && wx.hideLoading()
       }
     });
   });
