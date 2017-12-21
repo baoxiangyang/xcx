@@ -30,12 +30,24 @@ App({
     });
   },
   sendData: function() {
-    let userId = this.globalData.userId, code = this.globalData.code, _this = this;
+    let { userId, code, loginCount } = this.globalData, _this = this;
+    loginCount += 1;
     postRequest('/login', {userInfo: this.globalData.userInfo, code, userId}).then(body => {
-      if(!body.code){
+      if(body.code === 0){
         delete body.code;
         wx.setStorageSync('userId', body.userId);
         _this.globalData.userInfo = Object.assign(_this.globalData.userInfo, body);
+      } else{
+        if (loginCount < 3){
+          _this.login();
+        }else{
+          wx.showModal({
+            title: '失败',
+            content: '服务器连接失败，请稍后尝试',
+            showCancel: false,
+            confirmColor: '#ff0000'
+          });
+        }
       }
     });
   },
@@ -59,6 +71,7 @@ App({
   globalData: {
     userInfo: null,
     // 消费类型
-    billType: ['日常用品', '腐败聚会', '生活缴费', '其他']
+    billType: ['日常用品', '腐败聚会', '生活缴费', '其他'],
+    loginCount: 0
   }
 })

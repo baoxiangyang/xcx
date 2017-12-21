@@ -10,6 +10,7 @@ Page({
     addTips: '',
     initValue: '',
     roomList: [],
+    hasMore: true,
     pageNo: 1,
     findName: ''
   },
@@ -17,12 +18,6 @@ Page({
   createRoom: function() {
     this.setData({
       createShow: !this.data.createShow
-    });
-  },
-  //显示输入口令遮罩
-  addRoom: function(){
-    this.setData({
-      addShow: !this.data.addShow
     });
   },
   //点击遮罩空白区
@@ -33,7 +28,9 @@ Page({
       });
     } else if (event.target.id == 'addMask'){
       this.setData({
-        addShow: false
+        addShow: false,
+        activeRoomId: '',
+        addTips: ''
       });
     }
   },
@@ -46,15 +43,15 @@ Page({
       });
       return;
     }
-    if(data.name.length > 10){
+    if(data.name.length < 2){
       this.setData({
-        tips: '名称不能超过10个字符'
+        tips: '名称不能少于2个字符'
       });
       return;
     }
-    if (data.password.length > 10) {
+    if (data.password.length < 3) {
       this.setData({
-        tips: '口令不能超过10个字符'
+        tips: '口令不能少于3个字符'
       });
       return;
     }
@@ -83,18 +80,62 @@ Page({
       }
     });
   },
-  getList: function(nextPage){
-    let { pageNo, findName, roomList} = this.data;
+  //点击房间列表
+  addRoom: function (event) {
+    let roomList = getApp().globalData.userInfo.roomList;
+    if (roomList.indexOf(event.target.dataset.roomid) == -1){
+      wx.redirectTo({
+        url: '/pages/bills/bills?roomId=' + event.target.dataset.roomid
+      });
+    }else{
+      this.setData({
+        addShow: !this.data.addShow,
+        activeRoomId: event.target.dataset.roomid
+      });
+    }
+  },
+  addSubmit: function(event){
+    //加入房间
+    let password = event.detail.value.password,
+      activeRoomId = this.data.activeRoomId;
+    if (!password || password.length <3){
+      this.setData({
+        addTips:'请输入正确的口令'
+      });
+      return;
+    }
+    postRequest('/room/joinRoom', { roomid: activeRoomId, password}, true).then(data => {
+      if(data.code === 0){
+        wx.redirectTo({
+          url: '/pages/bills/bills?roomId=' + activeRoomId
+        });
+      }else{
+        this.setData({
+          addTips: data.msg
+        });
+      }
+    });
+  },
+  getList: function(nextPage, searchName){
+    let { pageNo, findName, roomList, hasMore} = this.data;
     if (nextPage){
       pageNo += 1;
+      //加载到最后一页后停止加载
+      if (!hasMore){
+        return false;
+      }
     }else{
       pageNo = 1;
+    }
+    if (searchName){
+      findName = searchName;
     }
     return postRequest('/room/getRoomList', {name: findName, pageNo: pageNo}, true).then(data => {
       if (data.code === 0) {
         this.setData({
           roomList: nextPage ? roomList.concat(data.roomList) : data.roomList,
-          pageNo
+          pageNo,
+          hasMore: data.roomList.length < 10 ? false: true
         });
       }else{
         return Promise.reject(data);
@@ -108,14 +149,24 @@ Page({
       });
     });
   },
+  searchRoom: function (event){
+    this.setData({
+      findName: event.detail.value
+    });
+    this.getList(undefined, event.detail.value);
+  },
   onLoad: function () {
     this.getList();
   },
   onPullDownRefresh: function(){
+    //下拉刷新
     this.getList().then(() => {
       wx.stopPullDownRefresh();
     },() => {
       wx.stopPullDownRefresh();
     });
+  },
+  onReachBottom: function(){
+    this.getList(true);
   }
-})
+});
