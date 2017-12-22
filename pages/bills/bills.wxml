@@ -33,7 +33,7 @@
         类型 <input placeholder="请选择类型" name="type" catchtap="showBillType" value='{{typeValue}}' disabled='true'/>
       </label>
       <label>
-        详情 <textarea placeholder="请输入详情" maxlength="200" name="detail" confirm-type="done" value='{{detail}}' />
+        详细 <textarea placeholder="请输入详细" maxlength="200" name="detail" confirm-type="done" value='{{detail}}' />
       </label>
       <text class="tips">{{tips}}</text>
       <view class='btn-view'>

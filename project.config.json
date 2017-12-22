@@ -21,8 +21,15 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
-			"list": []
+			"current": 0,
+			"list": [
+				{
+					"id": 0,
+					"name": "订单页",
+					"pathName": "pages/bills/bills",
+					"query": "roomId=5a3c78d58bc6a31c40c47a07"
+				}
+			]
 		}
 	}
 }

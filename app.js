@@ -10,7 +10,7 @@ App({
     wx.checkSession({
       success: () => {
         if (userId){
-          this.userInfo(this.sendData);
+          this.getAuth();
         }else{
           this.login();
         }
@@ -25,7 +25,7 @@ App({
     wx.login({
       success: res => {
         this.globalData.code = res.code;
-        this.userInfo(this.sendData);
+        this.getAuth();
       }
     });
   },
@@ -51,25 +51,57 @@ App({
       }
     });
   },
-  userInfo: function(callBack){
+  getAuth: function(callBack){
     wx.getSetting({
       success: res => {
         // 获取用户信息
         if (res.authSetting['scope.userInfo']) {
           // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-          wx.getUserInfo({
-            success: res => {
-              // 可以将 res 发送给后台解码出 unionId
-              this.globalData.userInfo = res.userInfo
-              callBack && callBack();
+          this.getUserInfo();
+        }else {
+          //发起请求授权
+          wx.authorize({
+            scope: 'scope.userInfo',
+            success: () => {
+              this.getUserInfo();
+            },
+            fail: () => {
+              //授权失败，弹出提示
+              wx.showModal({
+                title: '提示',
+                content: '本程序需要获取用户信息，请开启权限',
+                confirmText: '去开启',
+                success: function (res) {
+                  if (res.confirm) {
+                    //转跳权限页面，请求用户打开权限
+                    wx.openSetting({
+                      success: (res) => {
+                        this.getUserInfo();
+                      }
+                    });
+                  } else if (res.cancel) {
+                    console.log('用户点击取消')
+                  }
+                }
+              })
             }
           })
         }
+        
       }
     })
   },
+  getUserInfo: function(){
+    wx.getUserInfo({
+      success: res => {
+        // 可以将 res 发送给后台解码出 unionId
+        this.globalData.userInfo = res.userInfo;
+        this.sendData();
+      }
+    });
+  },
   globalData: {
-    userInfo: null,
+    userInfo: {},
     // 消费类型
     billType: ['日常用品', '腐败聚会', '生活缴费', '其他'],
     loginCount: 0
