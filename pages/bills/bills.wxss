@@ -1,8 +1,16 @@
+page, .billMain {
+  height: 100%;
+}
 /*头部css  */
 .header {
   background-color: #fff;
   text-align: center;
-  padding-bottom: 20rpx;
+  width:100%;
+  top: 0;
+  box-sizing: border-box;
+  line-height: 74rpx;
+  position: fixed;
+  z-index: 5;
 }
 .header text {
   font-size: 24rpx;
@@ -13,19 +21,23 @@
 .more {
   display: block;
   font-size: 28rpx;
-  line-height: 56rpx;
   float: right;
   color: #666;
 }
 /*消息列表css  */
+.body {
+  height: 100%;
+  box-sizing: border-box;
+  padding-top: 68rpx;
+}
 .list {
-  margin: 20rpx 0;
+  margin: 20rpx 20rpx;
   display: flex;
   justify-content: space-between;
   align-items:center;
   background-color: #fff;
   border-radius: 10rpx;
-  padding: 10rpx 20rpx;
+  padding: 10rpx 24rpx;
   box-shadow: 4rpx 6rpx 5rpx #000;
 }
 .left, .right {
@@ -68,7 +80,7 @@
 /*添加按钮css  */
 .add {
   position: fixed;
-  bottom:50rpx;
+  bottom:120rpx;
   right:50rpx;
   width: 40rpx;
   height: 40rpx;

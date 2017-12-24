@@ -1,4 +1,4 @@
-<view>
+<view class='billMain'>
   <!-- 顶部搜索、添加 -->
   <view class='header paddingSide'>
     <button size="mini" type="primary">结算</button>
@@ -6,28 +6,29 @@
     <view class='more'>更多 »</view>
   </view>
   <!--未结算账单列表  -->
-  <view class='body paddingSide'>
-    <view class='list'>
-      <image class="userAvatar left" src="../image/1.jpg"></image>
+  <scroll-view class='body'  scroll-y="true" scroll-into-view="{{viewPosition}}"
+    scroll-with-animation="false" bindscrolltoupper="getBills">
+    <view class='list'  wx:for="{{billList}}" wx:key="item._id" id="id_{{item._id}}">
+      <image class="userAvatar left" src="{{item.creater.avatarUrl}}"></image>
       <view class='middle'>
-        <view class='name'>小包总:</view>
-        <view class='details'>物管费</view>
-        <view class='createTime'>12月15日 11:07</view>  
+        <view class='name'>{{item.creater.nickName}}:</view>
+        <view class='details'>{{item.detail}}</view>
+        <view class='createTime'>{{item.time}}</view>  
       </view>
       <view class='right'>
         <view class='money'>
-          <text>¥</text>500
+          <text>¥</text>{{item.money}}
         </view>
       </view>
     </view>
-  </view>
+  </scroll-view>
   <!--添加按钮  -->
   <text class='add' catchtap="billMask" >记</text>
   <!--添加账单表单 -->
   <view class='mask' hidden="{{createBill ? false: true}}" catchtap="closeMask" id="addBillMask">
     <form bindsubmit="addSubmit" class='center'>
       <label>
-        金额 <input placeholder="请输入金额" maxlength="10" name="money" confirm-type="next" type='digit' value='{{money}}' />
+        金额 <input placeholder="请输入金额" maxlength="7" name="money" confirm-type="next" type='digit' value='{{money}}' />
       </label>
       <label>
         类型 <input placeholder="请选择类型" name="type" catchtap="showBillType" value='{{typeValue}}' disabled='true'/>

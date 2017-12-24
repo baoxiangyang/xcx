@@ -1,5 +1,6 @@
 //app.js
 const postRequest = require('./utils/util.js').postRequest;
+
 App({
   onLaunch: function () {
     //获取userid

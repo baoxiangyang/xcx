@@ -7,7 +7,7 @@
   </view>
   <!-- 房间列表 -->
   <view class='item-Box'>
-    <view class='item-list paddingSide' wx:for="{{roomList}}" wx:key="index._id" catchtap="addRoom" data-roomid="{{item._id}}">
+    <view class='item-list paddingSide' wx:for="{{roomList}}" wx:key="item._id" catchtap="addRoom" data-roomid="{{item._id}}">
       <text>{{item.name}}</text>
       <i class='icon-next'> </i>
     </view>

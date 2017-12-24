@@ -1,12 +1,26 @@
-const formatTime = date => {
-  const year = date.getFullYear()
-  const month = date.getMonth() + 1
-  const day = date.getDate()
-  const hour = date.getHours()
-  const minute = date.getMinutes()
-  const second = date.getSeconds()
+Promise.prototype['finally'] = function finallyPolyfill(callback) {
+  let constructor = this.constructor;
+  return this.then(function (value) {
+    return constructor.resolve(callback()).then(function () {
+      return value;
+    });
+  }, function (reason) {
+    return constructor.resolve(callback()).then(function () {
+      throw reason;
+    });
+  });
+};
 
-  return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+const formatTime = date => {
+  date = new Date(date);
+  const year = date.getFullYear()
+  const month = formatNumber(date.getMonth() + 1)
+  const day = formatNumber(date.getDate())
+  const hour = formatNumber(date.getHours())
+  const minute = formatNumber(date.getMinutes())
+  const second = formatNumber(date.getSeconds())
+
+  return `${month}月${day}日` + ' ' + [hour, minute].join(':')
 }
 
 const formatNumber = n => {
