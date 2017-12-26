@@ -64,36 +64,47 @@ Page({
     let { money, detail, type} = data;
     //校验通过发送请求
     this.postRequest('/bill/createBill', data, '发送中').then(result => {
-      let { avatarUrl, nickName } = getApp().globalData.userInfo;
-      //创建订单成功
-      let createData = {
-        _id: result._id,
-        time: this.formatTime(Date.now()),
-        money,
-        detail,
-        type,
-        creater: {avatarUrl, nickName}
-      };
-      this.setData({
-        billList: this.data.billList.concat(createData),
-        tips: '',
-        money: '',
-        detail: '',
-        typeValue: '',
-        viewPosition: 'id_' + result._id,
-        createBill: false
-      });
+      if (result.code === 0){
+        let { avatarUrl, nickName } = getApp().globalData.userInfo;
+        //创建订单成功
+        let createData = {
+          _id: result._id,
+          time: this.formatTime(Date.now()),
+          money,
+          detail,
+          type,
+          creater: {avatarUrl, nickName}
+        };
+        this.setData({
+          billList: this.data.billList.concat(createData),
+          tips: '',
+          money: '',
+          detail: '',
+          typeValue: '',
+          viewPosition: 'id_' + result._id,
+          createBill: false
+        });
+      }else{
+        this.setData({
+          tips: result.msg
+        });
+      }
     });
   },
-  getBills(roomid) {
+  getBills({ id, initList}) {
     //获取未结算订单信息
-    let { pageNo, roomId = roomid, billList, loading, hasMore} = this.data;
-    if (loading || !hasMore){
+    let { pageNo, roomId = id, billList, loading, hasMore} = this.data;
+    if (loading || (!initList && !hasMore)){
       return false;
     }
     this.setData({
       loading: true
     });
+    if (initList){
+      pageNo = 1;
+      billList = [];
+      hasMore = true;
+    }
     wx.showNavigationBarLoading()
     return this.postRequest('/room/findNoSettlements', {pageNo, roomId}).then(data => {
       if(data.code === 0){
@@ -109,9 +120,15 @@ Page({
           viewPosition: 'id_' + bills[bills.length -1]._id,
           pageNo: pageNo + 1,
           hasMore: bills.length == 10 ? true : false
-        })
+        });
+        return data.name
+      }else{
+        wx.showToast({
+          title: '失败',
+          image: '../image/error.png',
+          duration: 2000
+        });
       }
-      return data.name
     }).finally(() => {
       this.setData({
         loading: false
@@ -119,15 +136,26 @@ Page({
       wx.hideNavigationBarLoading()
     })
   },
+  settlement: function(){
+    this.postRequest('/room/settlement', {roomId: this.data.roomId}, '结算中')
+  },
   onLoad: function (data) {
     this.setData({
       roomId: data.roomId
     });
-    this.getBills(data.roomId).then((title => {
+    this.getBills({id: data.roomId}).then((title => {
       wx.setNavigationBarTitle({
         title
       });
     }))
+  },
+  onPullDownRefresh: function () {
+    //下拉刷新
+    this.getBills({ initList:true}).then(() => {
+      wx.stopPullDownRefresh();
+    }, () => {
+      wx.stopPullDownRefresh();
+    });
   }
 });
 

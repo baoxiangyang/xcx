@@ -1,7 +1,7 @@
 <view class='billMain'>
   <!-- 顶部搜索、添加 -->
   <view class='header paddingSide'>
-    <button size="mini" type="primary">结算</button>
+    <button size="mini" type="primary" bindtap='settlement'>结算</button>
     <text>¥</text>{{total}}
     <view class='more'>更多 »</view>
   </view>
