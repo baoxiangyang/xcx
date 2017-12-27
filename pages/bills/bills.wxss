@@ -11,6 +11,7 @@ page, .billMain {
   line-height: 74rpx;
   position: fixed;
   z-index: 5;
+  border-bottom:2rpx solid #999;
 }
 .header text {
   font-size: 24rpx;

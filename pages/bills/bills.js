@@ -3,7 +3,7 @@ const app = getApp(),
   { postRequest, validator, formatTime} = require('../../utils/util.js');
 Page({
   data: {
-    total: 100,
+    total: 0,
     billList: [],
     createBill: false,
     tips: '',
@@ -76,6 +76,7 @@ Page({
           creater: {avatarUrl, nickName}
         };
         this.setData({
+          total: (parseFloat(this.data.total) + parseFloat(money)).toFixed(2),
           billList: this.data.billList.concat(createData),
           tips: '',
           money: '',
@@ -116,8 +117,8 @@ Page({
         Array.prototype.unshift.apply(billList, bills);
         this.setData({
           billList,
-          total: data.total,
-          viewPosition: 'id_' + bills[bills.length -1]._id,
+          total: data.total.toFixed(2),
+          viewPosition: bills.length ? 'id_' + bills[bills.length -1]._id : '',
           pageNo: pageNo + 1,
           hasMore: bills.length == 10 ? true : false
         });
@@ -137,7 +138,11 @@ Page({
     })
   },
   settlement: function(){
-    this.postRequest('/room/settlement', {roomId: this.data.roomId}, '结算中')
+    this.postRequest('/room/settlement', {roomId: this.data.roomId}, '结算中').then(data => {
+      if(data.code === 0){
+        this.getBills({initList:true});
+      }
+    });
   },
   onLoad: function (data) {
     this.setData({
