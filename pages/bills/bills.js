@@ -141,6 +141,8 @@ Page({
     this.postRequest('/room/settlement', {roomId: this.data.roomId}, '结算中').then(data => {
       if(data.code === 0){
         this.getBills({initList:true});
+      }else{
+        
       }
     });
   },

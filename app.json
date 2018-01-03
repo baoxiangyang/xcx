@@ -2,12 +2,12 @@
   "pages":[
     "pages/index/index",
     "pages/bills/bills",
-    "pages/logs/logs"
+    "pages/roomlnfo/info"
   ],
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "合租记账",
+    "navigationBarTitleText": "合伙记",
     "navigationBarTextStyle":"black"
   }
 }
