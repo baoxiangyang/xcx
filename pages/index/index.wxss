@@ -19,16 +19,6 @@
   transform: rotate(45deg);
   float: right;
 }
-.icon-next {
-  width: 30rpx;
-  height: 30rpx;
-  border-color: rgb(173,171,174);
-  border-width: 4rpx;
-  border-bottom-style: solid;
-  border-right-style: solid;
-  display: inline-block;
-  transform: rotate(-45deg) translateX(-12rpx);
-}
 
 .item-list {
   height: 80rpx;

@@ -1,0 +1,73 @@
+.paddingSide {
+  background-color: #fff;
+  padding-top: 12rpx;
+  padding-bottom: 12rpx;
+  margin: 24rpx;
+  border-radius: 10rpx;
+}
+.roomName, .roomDescribe {
+  text-align: center;
+  font-size: 34rpx;
+}
+.roomDescribe {
+  font-size: 24rpx;
+  color: #999;
+  display: block;
+}
+.roomInfo {
+  border-top: 2rpx solid #eee;
+  margin-top: 12rpx;
+  font-size: 30rpx;
+}
+.infoItem {
+  margin: 12rpx 0;
+  overflow: hidden
+}
+.rightInfo {
+  float: right;
+  color: #999
+}
+.redColor {
+  color: red
+}
+.imgBox {
+  display: inline-block;
+  width: 130rpx;
+  margin: 10rpx 16rpx 0;
+}
+.userList image {
+  border-radius: 50%;
+  height: 130rpx;
+  width: 100%;
+}
+.headline {
+  font-size: 36rpx;
+  border-bottom: 2rpx solid #eee;
+  padding-bottom: 10rpx;
+}
+.billList {
+  margin-bottom: 70rpx;
+}
+.statementItem {
+  margin: 16rpx 0;
+}
+.icon-next,
+.statementList .money {
+  float: right;
+}
+.statementList .money {
+  margin-right: 20rpx;
+}
+.btnBox {
+  padding: 0 24rpx;
+  position: fixed;
+  bottom: 24rpx;
+  width: 100%;
+  box-sizing: border-box;
+}
+.exitBtn {
+  height: 80rpx;
+  display: block;
+  line-height: 80rpx;
+  font-size: 40rpx;
+}

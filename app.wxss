@@ -60,3 +60,14 @@ label {
 .btn-view button:first-child {
   margin-right: 150rpx;
 }
+
+.icon-next {
+  width: 30rpx;
+  height: 30rpx;
+  border-color: rgb(173,171,174);
+  border-width: 4rpx;
+  border-bottom-style: solid;
+  border-right-style: solid;
+  display: inline-block;
+  transform: rotate(-45deg) translateX(-12rpx);
+}

@@ -1,3 +1,52 @@
 <view>
-
+  <view class='header paddingSide'>
+    <view class='roomName'>5016</view>
+    <text class='roomDescribe'>这是描述文章呀艾斯德斯爽肤水</text>
+    <view class='roomInfo'>
+      <view class='infoItem'>
+        总金额 <text class='rightInfo redColor'>¥200</text>
+      </view>
+      <view class='infoItem'>
+        未结算金额 <text class='rightInfo redColor'>¥100</text>
+      </view>
+      <view class='infoItem'>
+        创建人 <text class='rightInfo'>嘻倪孢</text>
+      </view>
+      <view class='infoItem'>
+        创建时间 <text class='rightInfo'>2017-12-12</text>
+      </view>
+    </view>
+  </view>
+  <view class='userList paddingSide'>
+    <view class='headline'>成员</view>
+    <view class='imgBox'>
+      <image src="https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKsmaNJRxzwMMkFMdlkUB5YGyiaNcNumh4D8Wj2xUFMe8TicL1Csu9fAVGO3c8y4PRLibNAn7q5Yzbtg/0"></image>
+    </view>
+    <view class='imgBox'>
+      <image src="https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKsmaNJRxzwMMkFMdlkUB5YGyiaNcNumh4D8Wj2xUFMe8TicL1Csu9fAVGO3c8y4PRLibNAn7q5Yzbtg/0"></image>
+    </view>
+    <view class='imgBox'>
+      <image src="https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKsmaNJRxzwMMkFMdlkUB5YGyiaNcNumh4D8Wj2xUFMe8TicL1Csu9fAVGO3c8y4PRLibNAn7q5Yzbtg/0"></image>
+    </view>
+    <view class='imgBox'>
+      <image src="https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKsmaNJRxzwMMkFMdlkUB5YGyiaNcNumh4D8Wj2xUFMe8TicL1Csu9fAVGO3c8y4PRLibNAn7q5Yzbtg/0"></image>
+    </view>
+  </view>
+  <view class='statementList paddingSide'>
+    <view class='headline'>结算列表</view>
+    <view class='statementItem'>
+      <text>2017-01-23</text>
+      <i class='icon-next'> </i>
+      <text class='money redColor'>¥2564.12</text>
+    </view>
+  </view>
+  <view class='billList paddingSide'>
+    <view class='statementItem'>
+      <text>历史订单</text>
+      <i class='icon-next'> </i>
+    </view>
+  </view>
+  <view class='btnBox'>
+    <button type="warn" class='exitBtn'>退出</button>
+  </view>
 </view>
