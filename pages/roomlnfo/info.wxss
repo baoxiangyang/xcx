@@ -5,6 +5,23 @@
   margin: 24rpx;
   border-radius: 10rpx;
 }
+.header {
+  margin: 0;
+  position: inherit;
+  overflow: hidden;
+  height: 60rpx;
+  padding: 0 24rpx;
+  text-align: left;
+}
+.header .icon-back{
+  float: inherit;
+}
+.header text {
+  font-size: 32rpx;
+  float: right;
+  line-height: 50rpx;
+  color: #4A8DC8;
+}
 .roomName, .roomDescribe {
   text-align: center;
   font-size: 34rpx;
@@ -70,4 +87,8 @@
   display: block;
   line-height: 80rpx;
   font-size: 40rpx;
+}
+
+.manage {
+  color: #4A8DC8;
 }

@@ -1,5 +1,9 @@
 <view>
-  <view class='header paddingSide'>
+  <view class='header'>
+      <i class='icon-next icon-back'> </i>
+      <text>修改口令</text>
+  </view>
+  <view class='paddingSide'>
     <view class='roomName'>5016</view>
     <text class='roomDescribe'>这是描述文章呀艾斯德斯爽肤水</text>
     <view class='roomInfo'>
@@ -18,7 +22,9 @@
     </view>
   </view>
   <view class='userList paddingSide'>
-    <view class='headline'>成员</view>
+    <view class='headline'>
+      成员 <view class='more manage'>管理</view>
+    </view>
     <view class='imgBox'>
       <image src="https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKsmaNJRxzwMMkFMdlkUB5YGyiaNcNumh4D8Wj2xUFMe8TicL1Csu9fAVGO3c8y4PRLibNAn7q5Yzbtg/0"></image>
     </view>
@@ -33,7 +39,9 @@
     </view>
   </view>
   <view class='statementList paddingSide'>
-    <view class='headline'>结算列表</view>
+    <view class='headline'>
+      结算列表 <view class='more'>更多 »</view>
+    </view>
     <view class='statementItem'>
       <text>2017-01-23</text>
       <i class='icon-next'> </i>

@@ -2,29 +2,11 @@ page, .billMain {
   height: 100%;
 }
 /*头部css  */
-.header {
-  background-color: #fff;
-  text-align: center;
-  width:100%;
-  top: 0;
-  box-sizing: border-box;
-  line-height: 74rpx;
-  position: fixed;
-  z-index: 5;
-  border-bottom:2rpx solid #999;
-}
-.header text {
-  font-size: 24rpx;
-}
+
 .header button:first-child {
   float: left;
 }
-.more {
-  display: block;
-  font-size: 28rpx;
-  float: right;
-  color: #666;
-}
+
 /*消息列表css  */
 .body {
   height: 100%;

@@ -3,6 +3,21 @@ page {
   /* background-color: rgb(241,239,242); */
   background: linear-gradient(to right, #4A8DC8 , #8C9AFB);
 }
+.header {
+  background-color: #fff;
+  text-align: center;
+  width:100%;
+  top: 0;
+  box-sizing: border-box;
+  line-height: 74rpx;
+  position: fixed;
+  z-index: 5;
+  border-bottom:2rpx solid #999;
+}
+.header text {
+  font-size: 24rpx;
+}
+
 .paddingSide {
   padding: 0 24rpx;
 }
@@ -70,4 +85,18 @@ label {
   border-right-style: solid;
   display: inline-block;
   transform: rotate(-45deg) translateX(-12rpx);
+}
+.icon-back {
+  border-top-style: solid;
+  border-left-style: solid;
+  border-bottom-style: none;
+  border-right-style: none;
+  float: inherit;
+   transform: rotate(-45deg) translateX(12rpx);
+}
+.more {
+  display: block;
+  font-size: 28rpx;
+  float: right;
+  color: #666;
 }
