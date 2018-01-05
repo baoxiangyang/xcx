@@ -5,23 +5,7 @@
   margin: 24rpx;
   border-radius: 10rpx;
 }
-.header {
-  margin: 0;
-  position: inherit;
-  overflow: hidden;
-  height: 60rpx;
-  padding: 0 24rpx;
-  text-align: left;
-}
-.header .icon-back{
-  float: inherit;
-}
-.header text {
-  font-size: 32rpx;
-  float: right;
-  line-height: 50rpx;
-  color: #4A8DC8;
-}
+
 .roomName, .roomDescribe {
   text-align: center;
   font-size: 34rpx;
@@ -47,10 +31,14 @@
 .redColor {
   color: red
 }
+.roomInfo .infoItem:last-child .rightInfo {
+  color: #4A8DC8;
+}
 .imgBox {
   display: inline-block;
   width: 130rpx;
   margin: 10rpx 16rpx 0;
+  text-align:center;
 }
 .userList image {
   border-radius: 50%;

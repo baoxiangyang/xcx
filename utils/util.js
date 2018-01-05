@@ -11,7 +11,7 @@ Promise.prototype['finally'] = function finallyPolyfill(callback) {
   });
 };
 
-const formatTime = date => {
+const formatTime = (date, { showYear } = { showYear: false}) => {
   date = new Date(date);
   const year = date.getFullYear()
   const month = formatNumber(date.getMonth() + 1)
@@ -19,8 +19,11 @@ const formatTime = date => {
   const hour = formatNumber(date.getHours())
   const minute = formatNumber(date.getMinutes())
   const second = formatNumber(date.getSeconds())
-
-  return `${month}月${day}日` + ' ' + [hour, minute].join(':')
+  if (showYear){
+    return `${year}年${month}月${day}日`;
+  }else{
+    return `${month}月${day}日` + ' ' + [hour, minute].join(':');
+  }
 }
 
 const formatNumber = n => {

@@ -158,9 +158,7 @@ Page({
   },
   onPullDownRefresh: function () {
     //下拉刷新
-    this.getBills({ initList:true}).then(() => {
-      wx.stopPullDownRefresh();
-    }, () => {
+    this.getBills({ initList: true }).finally(() => {
       wx.stopPullDownRefresh();
     });
   }

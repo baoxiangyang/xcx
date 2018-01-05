@@ -3,7 +3,7 @@
   <view class='header paddingSide'>
     <button size="mini" type="primary" bindtap='settlement'>结算</button>
     <text>¥</text>{{total}}
-    <view class='more'>更多 »</view>
+    <navigator class='more' url="../roomlnfo/info?roomId={{roomId}}" open-type="navigate">更多 »</navigator>
   </view>
   <!--未结算账单列表  -->
   <scroll-view class='body'  scroll-y="true" scroll-into-view="{{viewPosition}}"

@@ -33,7 +33,7 @@
 					"id": 1,
 					"name": "房间详情",
 					"pathName": "pages/roomlnfo/info",
-					"query": ""
+					"query": "roomId=5a4334fe3241fc108451543e"
 				}
 			]
 		}

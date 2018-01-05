@@ -1,51 +1,42 @@
 <view>
-  <view class='header'>
-      <i class='icon-next icon-back'> </i>
-      <text>修改口令</text>
-  </view>
   <view class='paddingSide'>
-    <view class='roomName'>5016</view>
-    <text class='roomDescribe'>这是描述文章呀艾斯德斯爽肤水</text>
+    <view class='roomName'>{{roomInfo.name}}</view>
+    <text class='roomDescribe'>{{roomInfo.describe}}</text>
     <view class='roomInfo'>
       <view class='infoItem'>
-        总金额 <text class='rightInfo redColor'>¥200</text>
+        总金额 <text class='rightInfo redColor'>¥{{roomInfo.totalMoney}}</text>
       </view>
       <view class='infoItem'>
-        未结算金额 <text class='rightInfo redColor'>¥100</text>
+        未结算金额 <text class='rightInfo redColor'>¥{{roomInfo.noMoney}}</text>
       </view>
       <view class='infoItem'>
-        创建人 <text class='rightInfo'>嘻倪孢</text>
+        创建人 <text class='rightInfo'>{{roomInfo.creater.nickName}}</text>
       </view>
       <view class='infoItem'>
-        创建时间 <text class='rightInfo'>2017-12-12</text>
+        创建时间 <text class='rightInfo'>{{roomInfo.time}}</text>
+      </view>
+      <view class='infoItem' wx:if="{{isCreater}}">
+        操作 <text class='rightInfo'>修改口令</text>
       </view>
     </view>
   </view>
-  <view class='userList paddingSide'>
+  <view class='userList paddingSide' wx:if="{{roomInfo.roommates && roomInfo.roommates.length}}">
     <view class='headline'>
-      成员 <view class='more manage'>管理</view>
+      成员 <view class='more manage' wx:if="{{isCreater}}" catchtap="setManage">管理</view>
     </view>
-    <view class='imgBox'>
-      <image src="https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKsmaNJRxzwMMkFMdlkUB5YGyiaNcNumh4D8Wj2xUFMe8TicL1Csu9fAVGO3c8y4PRLibNAn7q5Yzbtg/0"></image>
-    </view>
-    <view class='imgBox'>
-      <image src="https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKsmaNJRxzwMMkFMdlkUB5YGyiaNcNumh4D8Wj2xUFMe8TicL1Csu9fAVGO3c8y4PRLibNAn7q5Yzbtg/0"></image>
-    </view>
-    <view class='imgBox'>
-      <image src="https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKsmaNJRxzwMMkFMdlkUB5YGyiaNcNumh4D8Wj2xUFMe8TicL1Csu9fAVGO3c8y4PRLibNAn7q5Yzbtg/0"></image>
-    </view>
-    <view class='imgBox'>
-      <image src="https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKsmaNJRxzwMMkFMdlkUB5YGyiaNcNumh4D8Wj2xUFMe8TicL1Csu9fAVGO3c8y4PRLibNAn7q5Yzbtg/0"></image>
+    <view class='imgBox' wx:for="{{roomInfo.roommates}}" wx:key="{{item._id}}" >
+      <image src="{{item.avatarUrl}}"></image>
+      <icon type="clear" color="red" wx:if="{{isManage}}" catchtap="deleteUser" data-userid="{{item._id}}"/>
     </view>
   </view>
-  <view class='statementList paddingSide'>
+  <view class='statementList paddingSide' wx:if="{{statementList.length}}">
     <view class='headline'>
       结算列表 <view class='more'>更多 »</view>
     </view>
-    <view class='statementItem'>
-      <text>2017-01-23</text>
+    <view class='statementItem' wx:for="{{statementList}}" wx:key="{{item._id}}" data-id="{{item._id}}">
+      <text>{{item.time}}</text>
       <i class='icon-next'> </i>
-      <text class='money redColor'>¥2564.12</text>
+      <text class='money redColor'>¥{{item.totalMoney}}</text>
     </view>
   </view>
   <view class='billList paddingSide'>
