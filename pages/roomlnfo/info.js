@@ -46,7 +46,7 @@ Page({
         });
         this.setData({
           statementList: list
-        })
+        });
       }
     });
   },
@@ -54,7 +54,7 @@ Page({
     //创建者显示提出开关
     this.setData({
       isManage: !this.data.isManage
-    })
+    });
   },
   deleteUser: function(event){
     //创建者踢出成员
@@ -81,7 +81,7 @@ Page({
             //踢出成员
             postRequest('/room/deleteUser', {userid}, '踢出中').then(data => {
               console.log(data);
-            })
+            });
           }
         }
       });
@@ -92,7 +92,7 @@ Page({
       roomId: query.roomId
     });
     this.getRoomInfo(query);
-    this.getStatementList(query)
+    this.getStatementList(query);
   },
   onPullDownRefresh: function(){
     //下拉刷新

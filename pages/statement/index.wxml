@@ -1,0 +1,54 @@
+<view>
+  <view class='paddingSide'>
+    <view class='headline'>基础信息</view>
+    <view class='infoItem'>
+        开始日期 <text class='rightInfo'>2017-12-12</text>
+    </view>
+    <view class='infoItem'>
+        结算日期 <text class='rightInfo'>2018-01-21</text>
+    </view>
+    <view class='infoItem'>
+        结算金额 <text class='rightInfo redColor'>¥2563.00</text>
+    </view>
+    <view class='infoItem'>
+        平均消费 <text class='rightInfo redColor'>¥962.00</text>
+    </view>
+    <view class='infoItem'>
+        结算者 <text class='rightInfo'>嘻倪孢</text>
+    </view>
+  </view>
+  <view class='paddingSide'>
+    <view class='headline'>结算列表</view>
+    <view class='stateHeader'>
+      <view class='stateItem'>成员</view>
+      <view class='stateItem'>支出</view>
+      <view class='stateItem'>结算</view>
+    </view>
+    <view class='stateList'>
+      <view class='stateItem'>嘻倪孢嘻倪孢嘻倪孢</view>
+      <view class='stateItem'>260.25</view>
+      <view class='stateItem'>-152.36</view>
+      <view class='stateItem'>嘻倪孢</view>
+      <view class='stateItem'>260.25</view>
+      <view class='stateItem'>-152.36</view>
+    </view>
+  </view>
+  <view class='paddingSide'>
+    <view class='headline'>结算订单</view>
+    <scroll-view class='billList'  scroll-y="true" scroll-into-view="{{viewPosition}}" bindscrolltoupper="getBills">
+      <view class='list'  wx:for="{{billList}}" wx:key="item._id" id="id_{{item._id}}">
+        <image class="userAvatar left" src="{{item.creater.avatarUrl}}"></image>
+        <view class='middle'>
+          <view class='name'>{{item.creater.nickName}}:</view>
+          <view class='details'>{{item.detail}}</view>
+          <view class='createTime'>{{item.time}}</view>  
+        </view>
+        <view class='right'>
+          <view class='money'>
+            <text>¥</text>{{item.money}}
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+</view>

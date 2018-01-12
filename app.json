@@ -2,7 +2,8 @@
   "pages":[
     "pages/index/index",
     "pages/bills/bills",
-    "pages/roomlnfo/info"
+    "pages/roomlnfo/info",
+    "pages/statement/index"
   ],
   "window":{
     "backgroundTextStyle":"light",

@@ -21,7 +21,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 1,
+			"current": 2,
 			"list": [
 				{
 					"id": 0,
@@ -34,6 +34,12 @@
 					"name": "房间详情",
 					"pathName": "pages/roomlnfo/info",
 					"query": "roomId=5a4334fe3241fc108451543e"
+				},
+				{
+					"id": 2,
+					"name": "结算详情",
+					"pathName": "pages/statement/index",
+					"query": "statementId=5a4ef56d19858419487bd7e6"
 				}
 			]
 		}
